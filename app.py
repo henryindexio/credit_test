@@ -1,5 +1,10 @@
 import os
 from flask import Flask, jsonify, request
+import pandas as pd
+from sklearn.metrics import f1_score
+from sklearn.metrics import recall_score
+from sklearn.metrics import precision_score
+from sklearn.metrics import accuracy_score
 
 app = Flask(__name__)
 
@@ -9,23 +14,29 @@ def apicall():
 	
 	y predict array (sent as a payload) from API Call
 	"""
-	#try:
-		#test_json = request.get_json()
-
-	#except Exception as e:
-	#	raise e
+	try:
+		y_pred_json = request.get_json()
+		y_pred  = json.loads(array)
+		
+	except Exception as e:
+		raise e
 	
 	
-	#if test.empty:
-	#	return(bad_request())
-	#else:
+	if y_pred.empty:
+		return(bad_request())
+	else:
 
-	#answer = list(test)
+		y_test = pd.read_csv('http://www.sharecsv.com/dl/0603fc2a3fafaf03fe477ff9e5078e03/y_test.csv')
+		f1 = f1_score(y_test,y_pred)
+		recall = recall_score(y_test,y_pred)
+		precision = precision_score(y_test,y_pred)
+		accuracy = accuracy_score(y_test,y_pred)
+		metrics = {'f1_score': f1, 'recall_score': recall, 'precision_score': precision, 'accuracy_score': accuracy}
+		
+		responses = jsonify(metrics)
+		responses.status_code = 200
 
-	responses = jsonify([5])
-	responses.status_code = 200
-
-	return (responses)
+		return (responses)
 
 
 @app.errorhandler(400)
