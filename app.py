@@ -16,7 +16,7 @@ def apicall():
 	"""
 	try:
 		y_pred_json = request.get_json()
-		y_pred  = json.loads(y_pred_json)
+		y_pred  = pd.read_json(y_pred_json).sort_index()
 		
 	except Exception as e:
 		raise e
