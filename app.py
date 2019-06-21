@@ -11,8 +11,6 @@ def apicall():
 	"""
 	try:
 		test_json = request.get_json()
-		test = pd.read_json(test_json, orient='values')
-
 
 	except Exception as e:
 		raise e
@@ -22,9 +20,9 @@ def apicall():
 		return(bad_request())
 	else:
 
-		answer = 5
+		answer = list(test)
 		
-		responses = jsonify(predictions=final_predictions.to_json(orient="values"))
+		responses = jsonify(answer)
 		responses.status_code = 200
 
 		return (responses)
