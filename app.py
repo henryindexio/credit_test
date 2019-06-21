@@ -16,7 +16,7 @@ def apicall():
 	"""
 	try:
 		y_pred_json = request.get_json()
-		y_pred  = json.loads(array)
+		y_pred  = json.loads(y_pred_json)
 		
 	except Exception as e:
 		raise e
