@@ -9,23 +9,23 @@ def apicall():
 	
 	y predict array (sent as a payload) from API Call
 	"""
-	try:
-		test_json = request.get_json()
+	#try:
+		#test_json = request.get_json()
 
-	except Exception as e:
-		raise e
+	#except Exception as e:
+	#	raise e
 	
 	
-	if test.empty:
-		return(bad_request())
-	else:
+	#if test.empty:
+	#	return(bad_request())
+	#else:
 
-		answer = list(test)
-		
-		responses = jsonify(answer)
-		responses.status_code = 200
+	#answer = list(test)
 
-		return (responses)
+	responses = jsonify([5])
+	responses.status_code = 200
+
+	return (responses)
 
 
 @app.errorhandler(400)
