@@ -3,7 +3,7 @@ from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
-@app.route('/predict', methods=['POST'])
+@app.route('/', methods=['POST'])
 def apicall():
 	"""API Call
 	
@@ -40,3 +40,7 @@ def bad_request(error=None):
 	resp.status_code = 400
 
 	return resp
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
